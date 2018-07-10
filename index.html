@@ -22,16 +22,23 @@
         }
         a { color: #ffffff; }
         a:visited { color: #ffffff; }
+        .score, #score{
+            font-size: 32;
+            display: inline;
+        }
     </style>
     </head>
     <body>
         <script src="three/three.js" type="text/javascript"></script>
+        <pre class="score">SCORE:</pre>
+            <pre id='score'>         0</pre>
         <div id="threediv" width="800" height="600"></div>
         <div class="info">
-            SCORE:
-            <span id='score'></span>
-            <br>
-            CONTROLS: <br>
+            HOW TO PLAY: <br>
+            - Press the corresponding arrow key when a triangle is blue to make it green. <br>
+            - If you press a key for a green triangle it is game over. <br>
+            - If all 3 triangles are blue it is game over. <br>
+            - Press Space to start. <br>
             <a href="http://minkcv.com">minkcv.com</a>
         </div>
         <script src="main.js" type="text/javascript"></script>
