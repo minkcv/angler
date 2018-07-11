@@ -10,7 +10,7 @@ addEventListener("keyup", function(e) {
     delete keysDown[e.keyCode];
 }, false);
 
-var greenMaterial = new THREE.MeshBasicMaterial({color: 0x00ff00, side: THREE.DoubleSide});
+var greenMaterial = new THREE.MeshPhongMaterial({color: 0x00ff00, side: THREE.DoubleSide});
 var blueMaterial = new THREE.MeshBasicMaterial({color: 0x0000ff, side: THREE.DoubleSide});
 var redMaterial = new THREE.MeshBasicMaterial({color: 0xff0000, side: THREE.DoubleSide});
 var whiteMaterial = new THREE.MeshBasicMaterial({color: 0xffffff, side: THREE.DoubleSide});
@@ -22,9 +22,12 @@ var height = threediv.clientHeight;
 var scene = new THREE.Scene();
 scene.background = new THREE.Color('#cf6ffc');
 
-var light = new THREE.PointLight(0xffffff, 1, 0);
-light.translateZ(100);
-//scene.add(light);
+var light1 = new THREE.PointLight(0xffffff, 1, 0);
+light1.translateZ(100);
+var light2 = new THREE.PointLight(0xffffff, 1, 0);
+light2.translateY(-100);
+var light3 = new THREE.PointLight(0xffffff, 1, 0);
+light3.translateY(100);
 
 var scale = 16;
 var camera = new THREE.OrthographicCamera(width / -scale, width / scale, height / scale, height / -scale, 0, 4000);
@@ -34,6 +37,9 @@ camera.updateProjectionMatrix();
 
 var cam = new THREE.Object3D(); // Parent for camera to rotate/pan easier
 cam.add(camera);
+cam.add(light1);
+cam.add(light2);
+cam.add(light3);
 scene.add(cam);
 
 var axes = new THREE.AxesHelper(50);
@@ -79,6 +85,7 @@ var tri = new THREE.Shape();
 tri.moveTo(-length / 2, -height / 2);
 tri.lineTo(length / 2, -height / 2);
 tri.lineTo(0, height / 2);
+//var geometry = new THREE.ExtrudeGeometry(tri, {depth: 1, bevelEnabled: false});
 var geometry = new THREE.ShapeGeometry(tri);
 geometry.applyMatrix( new THREE.Matrix4().makeTranslation(0, (height / 2) - centerY, 0) );
 
@@ -93,7 +100,6 @@ meshLeft.translateY(-height);
 triHolder.add(meshTop);
 triHolder.add(meshRight);
 triHolder.add(meshLeft);
-triHolder.add(light);
 
 
 scene.add(triHolder);
