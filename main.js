@@ -187,6 +187,8 @@ function update() {
         level = 6;
     if (score >= 240)
         level = 7;
+    if (score >= 290)
+        level = 8;
 
     var time = Date.now();
     if (time > lastTime + delay) {
@@ -261,6 +263,11 @@ function update() {
     if (level == 7) {
         pulseEach();
         spinEachCenter();
+        spinCamera();
+    }
+    if (level == 8) {
+        spinEachCenter();
+        spinAllCenter();
         spinCamera();
     }
 }
