@@ -101,6 +101,7 @@ scene.add(triHolder);
 var level;
 var state;
 var score;
+var highScore = 0;
 
 var meshes = [meshLeft, meshTop, meshRight];
 var scoreAmount = 10;
@@ -111,7 +112,7 @@ function restart() {
     // Left, Top, Right
     state = [false, false, false];
     score = 0;
-    document.getElementById('score').innerHTML = score.toString().padStart(10);
+    setScore();
     level = 0;
     gameOver = false;
     paused = false;
@@ -124,6 +125,14 @@ function restart() {
     cam.rotation.z = 0;
     meshes.forEach(function(mesh) {mesh.rotation.x = mesh.rotation.y = mesh.rotation.z = 0;});
     cam.remove(gameOverMesh);
+}
+
+function setScore() {
+    document.getElementById('score').innerHTML = score.toString().padStart(10);
+    if (score > highScore) {
+        document.getElementById('high-score').innerHTML = score.toString().padStart(5);
+        highScore = score;
+    }
 }
 
 function setRandomState() {
@@ -178,7 +187,7 @@ function update() {
         if (state[1] == true) {
             state[1] = false;
             score+=scoreAmount;
-            document.getElementById('score').innerHTML = score.toString().padStart(10);
+            setScore();
             delete keysDown[keys.up];
             meshTop.material = greenMaterial;
         }
@@ -191,7 +200,7 @@ function update() {
         if (state[0] == true) {
             state[0] = false;
             score+=scoreAmount;
-            document.getElementById('score').innerHTML = score.toString().padStart(10);
+            setScore();
             delete keysDown[keys.left];
             meshLeft.material = greenMaterial;
         }
@@ -204,7 +213,7 @@ function update() {
         if (state[2] == true) {
             state[2] = false;
             score+=scoreAmount;
-            document.getElementById('score').innerHTML = score.toString().padStart(10);
+            setScore();
             delete keysDown[keys.right];
             meshRight.material = greenMaterial;
         }

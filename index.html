@@ -31,20 +31,30 @@
         pre {
             margin: 0px;
         }
-        a { color: #ffffff; }
-        a:visited { color: #ffffff; }
-        .score, #score{
+        .score, #score, #high-score{
             font-size: 28;
             display: inline;
         }
+        #score-container {
+            padding-left: 40%;
+            width: 30%;
+            text-align: left;
+        }
+        a { color: #ffffff; }
+        a:visited { color: #ffffff; }
     </style>
     </head>
     <body>
         <script src="three/three.js" type="text/javascript"></script>
         <p class='title'>Angler >:(</p>
         <br>
-        <pre class="score">SCORE:</pre>
-        <pre id='score'>         0</pre>
+        <div id='score-container'>
+            <pre class="score">HIGH SCORE:</pre>
+            <pre id='high-score'>    0</pre>
+            <br>
+            <pre class="score">SCORE:</pre>
+            <pre id='score'>         0</pre>
+        </div>
         <div id="threediv" width="400" height="300"></div>
         <div class="info">
             HOW TO PLAY: <br>
