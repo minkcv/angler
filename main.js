@@ -169,14 +169,18 @@ function update() {
 
     if (score >= 10)
         level = 1;
-    if (score >= 80)
+    if (score >= 50)
         level = 2;
-    if (score >= 120)
+    if (score >= 90)
         level = 3;
-    if (score >= 160)
+    if (score >= 120)
         level = 4;
-    if (score >= 200)
+    if (score >= 160)
         level = 5;
+    if (score >= 200)
+        level = 6;
+    if (score >= 240)
+        level = 7;
 
     var time = Date.now();
     if (time > lastTime + delay) {
@@ -222,20 +226,34 @@ function update() {
             paused = true;
         }
     }
-    if (level == 1)
+    if (level == 1) {
         spinAllCenter();
+    }
     if (level == 2) {
+        pulseEach();
+        spinAllCenter();
+    }
+    if (level == 3) {
+        pulseAll();
         spinAllCenter();
         spinEachCenter();
     }
-    if (level == 3)
-        spinCamera();
     if (level == 4) {
-        spinAllCenter();
+        pulseAll();
         spinCamera();
     }
     if (level == 5) {
         spinAllCenter();
+        spinEachCenter();
+        spinCamera();
+    }
+    if (level == 6) {
+        pulseEach();
+        spinAllCenter();
+        spinCamera();
+    }
+    if (level == 7) {
+        pulseEach();
         spinEachCenter();
         spinCamera();
     }
@@ -254,6 +272,18 @@ function spinEachCenter() {
 function spinCamera() {
     cam.rotateX(0.01);
     cam.rotateY(0.01);
+}
+
+function pulseAll() {
+    triHolder.scale.x += Math.sin(Date.now() / 100) * 0.01;
+    triHolder.scale.y += Math.sin(Date.now() / 100) * 0.01;
+}
+
+function pulseEach() {
+    meshes.forEach(function(mesh) {
+        mesh.scale.x += Math.sin(Date.now() / 100) * 0.01;
+        mesh.scale.y += Math.sin(Date.now() / 100) * 0.01;
+    })
 }
 
 function animate() {
