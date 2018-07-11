@@ -138,7 +138,6 @@ function setRandomState() {
     if (state[0] && state[1] && state[2])
     {
         paused = true;
-        meshes.forEach(function(mesh) { mesh.material = redMaterial;});
     }
 }
 
@@ -159,7 +158,7 @@ function update() {
     if (paused)
         return;
 
-    if (score >= 40)
+    if (score >= 10)
         level = 1;
     if (score >= 80)
         level = 2;
@@ -234,7 +233,7 @@ function update() {
 }
 
 function spinAllCenter() {
-    triHolder.rotateZ(0.01);
+    triHolder.rotateZ(0.0001 * score);
 }
 
 function spinEachCenter() {
@@ -246,7 +245,6 @@ function spinEachCenter() {
 function spinCamera() {
     cam.rotateX(0.01);
     cam.rotateY(0.01);
-    cam.rotateZ(0.01);
 }
 
 function animate() {
